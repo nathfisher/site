@@ -5,3 +5,4 @@ dist
 build
 src/assets/_components/*
 !src/assets/_components/.empty
+.idea

@@ -153,6 +153,16 @@ module.exports = function(grunt) {
           }
         ]
       },
+      stylesheets: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= happyPlan.src.assets.styles %>',
+            src: ['**'],
+            dest: '<%= happyPlan.dist.assets.styles %>'
+          }
+        ]
+      },
       images: {
         files: [
           {
@@ -308,9 +318,9 @@ module.exports = function(grunt) {
           files: ['<%= happyPlan.src.assets.scripts %>/**/*'],
           tasks: ['concat:dist']
       },
-      scss: {
+      stylesheets: {
           files: ['<%= happyPlan.src.assets.styles %>/**/*'],
-          tasks: ['compass:dev']
+          tasks: ['copy:stylesheets']
       },
       static: {
           files: ['<%= happyPlan.src.assets.static %>**/*', '!<%= happyPlan.src.assets.static %>**/_*/**'],
@@ -335,7 +345,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['dev', 'livereload-start', 'server', 'open:dev', 'regarde']);
   grunt.registerTask('dist',    ['jshint', 'build', 'compass:dist', 'uglify:dist', 'imagemin:dist', 'clean:build']);
   grunt.registerTask('dev',     ['jshint', 'build', 'compass:dev']);
-  grunt.registerTask('build',   ['clean:dist', 'jekyll:dist', 'copy:root', 'shell:svgToFonts', 'copy:images', 'copy:static', 'copy:medias', 'concat:dist']);
+  grunt.registerTask('build',   ['clean:dist', 'jekyll:dist', 'copy:root', 'shell:svgToFonts', 'copy:stylesheets', 'copy:images', 'copy:static', 'copy:medias', 'concat:dist']);
 
   // jekyll
   grunt.registerTask('jekyll:dist',   ['jekyll:build', 'copy:jekyllBuildToDist']);
